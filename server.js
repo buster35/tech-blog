@@ -18,7 +18,7 @@ const sess = {
   })
 };
 
-//asking express to use session...
+//asking express to initiate session middleware, and declaring session variable above
 app.use(session(sess));
 
 app.use(express.json());
