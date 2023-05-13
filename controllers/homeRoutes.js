@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { Blog, User } = require("../models");
 // const auth = require("../utils/auth");
 
-//requests for data while ON homepage
+//any route requests other than /api's running from homepage ("/") land here
 
 //GET route on page load; get all stored blog data w/ username attached (from User table model)//
 router.get("/", async (req, res) => {
@@ -27,14 +27,14 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get('/login', (req, res) => {
+router.get('/login', (req, res) => { //working
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
     res.redirect('/');
     return;
   }
 
-  res.render('login');
+  res.render('login'); //renders login.handlebars
 });
 
 module.exports = router;
