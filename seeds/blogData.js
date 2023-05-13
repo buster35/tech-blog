@@ -3,7 +3,7 @@ const { Blog } = require("../models");
 const blogData = [
   {
     name: "Model-View-Controller",
-    description: "lorem ipsum......."
+    description: "lorem ipsum.......",
   },
   {
     name: "Separation of Concerns",
