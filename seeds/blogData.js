@@ -1,6 +1,5 @@
-const { Blog } = require("../models/Blog");
+const { Blog } = require("../models");
 
-//TODO:add date created property for each blog instance
 const blogData = [
   {
     name: "Model-View-Controller",
@@ -21,6 +20,5 @@ const blogData = [
 ];
 
 //passing array of instances to seed database in bulk
-const blogSeed = () => Blog.bulkCreate(blogData);
 
-module.exports = blogSeed;
+module.exports = blogData;
