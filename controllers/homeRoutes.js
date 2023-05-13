@@ -1,10 +1,11 @@
 const router = require("express").Router();
 const { Blog, User } = require("../models");
-// const auth = require("../utils/auth");
+const auth = require("../utils/auth");
 
 //any route requests other than /api's running from homepage ("/") land here
 
 //GET route on page load; get all stored blog data w/ username attached (from User table model)//
+//TODO: debug
 router.get("/", async (req, res) => {
   try {
     const blogData = await Blog.findAll({
@@ -36,6 +37,25 @@ router.get('/login', (req, res) => { //working
 
   res.render('login'); //renders login.handlebars
 });
+
+router.get("/dashboard", auth, async (req, res) => { //endpoint working
+  try {
+    // Find the logged in user based on the session ID
+    const userData = await User.findByPk(req.session.id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Blog }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    res.render('dashboard', {
+      ...user,
+      logged_in: true
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
 
 module.exports = router;
 
