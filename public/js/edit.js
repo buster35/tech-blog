@@ -25,7 +25,7 @@ const deleteClickHandler = async function() {
     method: 'DELETE'
   });
 
-  document.location.replace('/dashboard');
+  document.location.replace('/api/dashboard');
 };
 
 document

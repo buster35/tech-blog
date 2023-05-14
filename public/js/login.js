@@ -16,7 +16,7 @@ const loginFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace("/dashboard"); //GET route in homeRoutes.js
+      document.location.replace("/api/dashboard"); //GET route in homeRoutes.js
     } else {
       alert(response);
     }
@@ -26,7 +26,3 @@ const loginFormHandler = async (event) => {
 document
   .querySelector(".login-form")
   .addEventListener("submit", loginFormHandler);
-
-document
-  .querySelector('.signup-form')
-  .addEventListener('submit', renderSignup());

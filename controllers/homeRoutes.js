@@ -19,10 +19,7 @@ router.get("/", async (req, res) => {
 
     const serializedData = blogData.map((data) => data.get({ plain: true }));
 
-    res.render("homepage", {
-      serializedData,
-      logged_in: req.session.logged_in  
-    });
+    res.render("homepage", serializedData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -37,22 +34,6 @@ router.get('/login', (req, res) => { //working
 
   res.render('login'); //renders login.handlebars
 });
-
-router.get("/dashboard", auth, async (req, res) => {
-  try {
-    // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Blog }],
-    });
-
-    const user = userData.get({ plain: true });
-
-    res.render('dashboard', {logged_in: req.session.logged_in});
-  } catch (err) {
-    res.status(500).json(err);
-  }
-})
 
 module.exports = router;
 
