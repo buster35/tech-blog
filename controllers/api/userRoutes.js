@@ -1,28 +1,31 @@
 const router = require('express').Router();
 const User = require('../../models/User');
 
-//api/users -> signup
+//api/users -> get signup form
 router.get('/', (req, res) => { //working
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
-    res.redirect('/');
+    res.redirect('/'); //example of the controller not needing to communicate w/ model
     return;
   }
-
   res.render('signup'); //renders signup.handlebars
 });
 
+//api/users -> create a new user
 router.post('/', async (req, res) => {
+  console.log(req.body) //receiving post request from signup.js
   try {
-    const userData = await User.create(req.body);
-
+    const userData = await User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password
+    });
     //define a new user session
-    req.session.save(() => {
+    req.session.save(() => { //working
       req.session.user_id = userData.id;
       req.session.logged_in = true;
 
-      res.status(200).json({ message: 'Thank you for signing up.' });
-      return;
+      res.status(200).json(userData);
     });
   } catch (err) {
     res.status(400).json(err);
@@ -38,7 +41,7 @@ router.post('/login', async (req, res) => { //working
     if (!userData) {
       res
         .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
+        .json(err);
       return;
     }
 
@@ -47,7 +50,7 @@ router.post('/login', async (req, res) => { //working
     if (!validPassword) {
       res
         .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
+        .json(err);
       return;
     }
 
@@ -61,7 +64,7 @@ router.post('/login', async (req, res) => { //working
 
   } catch (err) {
     res.status(400).json(err);
-    console.log(err) //this is current state
+     //this is current state
   }
 });
 
