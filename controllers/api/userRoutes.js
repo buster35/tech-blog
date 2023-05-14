@@ -1,7 +1,17 @@
 const router = require('express').Router();
 const User = require('../../models/User');
 
-//api/users
+//api/users -> signup
+router.get('/', (req, res) => { //working
+  // If the user is already logged in, redirect the request to another route
+  if (req.session.logged_in) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('signup'); //renders signup.handlebars
+});
+
 router.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body);
@@ -11,7 +21,8 @@ router.post('/', async (req, res) => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
 
-      res.status(200).json(userData);
+      res.status(200).json({ message: 'Thank you for signing up.' });
+      return;
     });
   } catch (err) {
     res.status(400).json(err);

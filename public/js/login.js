@@ -4,7 +4,7 @@ const loginFormHandler = async (event) => {
   const email = document.querySelector("#email-input-login").value.trim();
   const password = document.querySelector("#password-input-login").value.trim();
 
-  if (email && password) {
+  if (email && password) { //working
     const response = await fetch("api/users/login", {
       //POST request to API endpoint; correct//
       method: "POST",
@@ -19,7 +19,6 @@ const loginFormHandler = async (event) => {
       document.location.replace("/dashboard"); //GET route in homeRoutes.js
     } else {
       alert(response);
-      console.log(response) //working
     }
   }
 };
