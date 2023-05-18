@@ -17,9 +17,10 @@ router.get("/", async (req, res) => {
       ],
     });
 
-    const serializedData = blogData.map((data) => data.get({ plain: true }));
+    const blogPosts = blogData.map((data) => data.get({ plain: true }));
+    console.log(blogPosts)
 
-    res.render("homepage", serializedData);
+    res.render("homepage", {blogPosts});
   } catch (err) {
     res.status(500).json(err);
   }
