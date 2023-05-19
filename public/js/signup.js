@@ -16,7 +16,7 @@ async function signupFormHandler(event) {
     });
 
     if (response.ok) {
-      document.location.replace("/api/dashboard"); //working
+      document.location.replace("/dashboard"); //working
     } else {
       alert(response);
     }

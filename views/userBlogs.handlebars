@@ -1,11 +1,11 @@
 <div class="blogs">
-  <h1>Check out some of our topics so far:</h1>
-  {{#each blogPosts}}
+  <h1>Here are your blog posts:</h1>
+  {{#each userBlogs}}
   <div class="card card-body">
     <h2 class="card-header">{{name}}</h2>
     <p>{{description}}</p>
-    <p>Authored By: {{User.username}}</p>
     <p>Date Created: {{date_created}}</p>
     </div>
   {{/each}}
 </div>
+

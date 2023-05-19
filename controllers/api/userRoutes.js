@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
-    }); //working
+    });
     //define a new user session
     req.session.save(() => {
       req.session.user_id = userData.id;
@@ -33,9 +33,8 @@ router.post("/", async (req, res) => {
   }
 });
 
-//login event - looking for exact email and password match in db
+//login event - looking for exact email and password match in db; good//
 router.post("/login", async (req, res) => {
-  //working
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
     console.log(userData);

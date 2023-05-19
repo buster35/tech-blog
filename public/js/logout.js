@@ -12,4 +12,17 @@ const logout = async () => {
   }
 };
 
+const loginAlert = async () => {
+  const response = await fetch("/login", {
+    method: "GET",
+    headers: {},
+  })
+
+  if (response.ok) {
+    alert("You are already logged in.")
+  }
+}
+
 document.querySelector("#logout-link").addEventListener("click", logout);
+
+document.querySelector(".main-login").addEventListener("click", loginAlert);

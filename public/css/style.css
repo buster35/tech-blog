@@ -84,6 +84,7 @@ input {
   background-color: var(--light-dark);
   box-shadow: 3px 3px var(--dark);
   transform: translate(-1px, -1px);
+  cursor: pointer;
 }
 
 .btn:hover {
@@ -208,6 +209,10 @@ input {
 /* HEIGHT / WIDTH UTILS */
 .min-100-vh {
   min-height: 100vh;
+}
+
+.min-50-vh {
+  min-height: 50vh;
 }
 
 .min-100-vw {
