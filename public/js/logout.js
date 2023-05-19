@@ -25,4 +25,4 @@ const loginAlert = async () => {
 
 document.querySelector("#logout-link").addEventListener("click", logout);
 
-document.querySelector(".main-login").addEventListener("click", loginAlert);
+// document.querySelector(".main-login").addEventListener("click", loginAlert);

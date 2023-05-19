@@ -13,8 +13,8 @@ router.get("/", (req, res) => {
 });
 
 //api/users -> create a new user
+//receiving post request from signup.js
 router.post("/", async (req, res) => {
-  console.log(req.body); //receiving post request from signup.js
   try {
     const userData = await User.create({
       username: req.body.username,
