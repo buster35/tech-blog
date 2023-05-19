@@ -3,7 +3,6 @@ const User = require("../../models/User");
 
 //api/users -> get signup form
 router.get("/", (req, res) => {
-  //working
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
     res.redirect("/"); //example of the controller not needing to communicate w/ model
