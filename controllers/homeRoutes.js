@@ -24,16 +24,22 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/dashboard", auth, async (req, res) => {
+  if (req.session.logged_in) {
+    res.redirect("back")
+  } else if (!req.session.logged_in) {
+    res.render("login", {layout: "dashboard"} );
+  }
+})
 
-router.get("/dashboard/:id", auth, async (req, res) => {
+router.get("/dashboard/:id", auth, async (req, res) => { //working
     // Find the logged in user's blog data based on the session Id//
     try {
-      const userData = await User.findByPk(req.params.id, { //user_id undefined here
+      const userData = await User.findByPk(req.params.id, {
       });
       const user = userData.get({ plain: true });
-      console.log(user)
+
       const blogData = await Blog.findAll({ where: {user_id: user.id}, raw: true });
-      console.log(blogData)
 
     res.render("userBlogs", { layout: "dashboard", blogData });
 

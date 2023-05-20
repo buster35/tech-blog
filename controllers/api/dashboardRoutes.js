@@ -13,4 +13,9 @@ router.get("/new", auth, async (req, res) => {
   }
 });
 
+router.get("/:id", auth, async (req, res) => {
+
+  res.render("userEdit", { layout: "dashboard" })
+})
+
 module.exports = router;
