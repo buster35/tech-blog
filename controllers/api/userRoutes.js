@@ -36,7 +36,9 @@ router.post("/", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
-    console.log(userData);
+   
+    const userTrim = userData.get({ plain: true })
+
     if (!userData) {
       res.status(404).json(err);
       return;
@@ -51,20 +53,18 @@ router.post("/login", async (req, res) => {
 
     //define a new user session
     req.session.save(() => {
-      req.session.user_id = userData.id;
+      req.session.user_id = userTrim.id;
       req.session.logged_in = true;
-
-      res.json({ user: userData, message: "You are now logged in!" });
+    
+      return res.json({userTrim, message: "You are now logged in!"})
     });
   } catch (err) {
     res.status(400).json(err);
-    //this is current state
   }
 });
 
 //logout and "destroy" the stored user session
 router.post("/logout", (req, res) => {
-  //working
   if (req.session.logged_in) {
     req.session.destroy(() => {
       res.status(204).end();

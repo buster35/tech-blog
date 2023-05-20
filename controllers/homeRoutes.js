@@ -24,16 +24,18 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/dashboard", auth, async (req, res) => {
-    // Find the logged in user's blog data based on the session ID
-    try {
-      const blogData = await Blog.findAll({
-        where: req.session.user_id = User.id,
-      });
-  
-      const userBlogs = blogData.map((data) => data.get({ plain: true }));
 
-    res.render("userBlogs", { layout: "dashboard", userBlogs });
+router.get("/dashboard/:id", auth, async (req, res) => {
+    // Find the logged in user's blog data based on the session Id//
+    try {
+      const userData = await User.findByPk(req.params.id, { //user_id undefined here
+      });
+      const user = userData.get({ plain: true });
+      console.log(user)
+      const blogData = await Blog.findAll({ where: {user_id: user.id}, raw: true });
+      console.log(blogData)
+
+    res.render("userBlogs", { layout: "dashboard", blogData });
 
   } catch (err) {
     res.status(500).json(err);

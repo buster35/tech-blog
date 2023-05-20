@@ -17,11 +17,11 @@ const hbs = exphbs.create();
 
 
 const sess = {
-  secret: process.env.SECRET,
-  cookie: {},
+  secret: "process.env.SECRET",
+  cookie: {_expires: 300000},
   resave: false,
   saveUninitialized: true,
-  store: new SequelizeStore({
+  store: new SequelizeStore({ //stores session in db
     db: sequelize
   })
 };

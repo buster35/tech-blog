@@ -5,9 +5,8 @@ const loginFormHandler = async (event) => {
   const password = document.querySelector("#password-input-login").value.trim();
 
   if (email && password) {
-    //working
     const response = await fetch("api/users/login", {
-      //POST request to API endpoint; correct//
+      //POST request to API endpoint//
       method: "POST",
       body: JSON.stringify({
         email,
@@ -16,8 +15,13 @@ const loginFormHandler = async (event) => {
       headers: { "Content-Type": "application/json" },
     });
 
+   //response is sending the status of the fetch request
     if (response.ok) {
-      document.location.replace("/dashboard"); //GET route in homeRoutes.js
+      const body = await response.json()
+      console.log(body)
+      const id = body.userTrim.id
+      console.log(id)
+      document.location.replace(`/dashboard/${id}`); //GET route in homeRoutes.js
     } else {
       alert(response);
     }
